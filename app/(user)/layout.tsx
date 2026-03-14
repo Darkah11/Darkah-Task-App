@@ -4,6 +4,7 @@ import { adminAuth } from "../_config/firebase-admin";
 import { User } from "../_types/User";
 import { verifyUserSession } from "../_lib/sessionHandler";
 import { getBoards } from "../_lib/firebase";
+import { BoardWithId } from "../_types/Board";
 
 export default async function RootLayout({
   children,

@@ -26,7 +26,7 @@ import Loader from "./Loader";
 
 interface MyComponentProps {
   user: null | User;
-  boards: BoardWithId[];
+  boards: BoardWithId[] | null;
 }
 
 export default function SideNav({ user, boards }: MyComponentProps) {
@@ -90,7 +90,7 @@ export default function SideNav({ user, boards }: MyComponentProps) {
         <div className=" mt-10 flex-1 flex justify-between flex-col">
           <div>
             <p className=" font-bold px-3 mb-3">Boards</p>
-            {user !== null && boards.length !== 0 && (
+            {user !== null && boards && boards.length !== 0 && (
               <div className=" flex flex-col gap-y-3 ">
                 {boards.map((board, index) => {
                   // const LinkIcon = link.icon;
