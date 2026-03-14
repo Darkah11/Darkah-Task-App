@@ -1,26 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-card: #FFFFFF; 
+  --color-text: #000000;
+  --color-gray: #4A4A4A;   
+  --color-bg: #EBEBEB;
+  --color-primary: #03DAC5; 
+  --color-purple: #c1bbe1;
+  --color-orange: #f0d5c2;
+  --color-yellow: #faf1d4;
+  --color-blue: #d5e6fb;
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+[data-theme="dark"] {
+  --color-card: #121212;
+  --color-text: #FFFFFF; 
+  --color-gray: #F0F0F0; 
+  --color-bg: #2C2C2C; 
+  --color-primary: #03DAC5; 
 }
+@theme {
+  --color-app-bg: var(--color-bg);
+  --color-app-text: var(--color-text);
+  --color-app-card: var(--color-card);
+  --color-app-gray: var(--color-gray);
+  --color-app-primary: var(--color-primary);
+  --color-app-todo: var(--color-purple);
+  --color-app-progress: var(--color-orange);
+  --color-app-pending: var(--color-yellow);
+  --color-app-completed: var(--color-blue);
+}
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .no-scrollbar {
+      -ms-overflow-style: none; 
+      scrollbar-width: none; 
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+button {
+  cursor: pointer;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  --c:no-repeat radial-gradient(farthest-side,#03DAC5 92%,#03DAC5);
+  background: 
+    var(--c) 50%  0, 
+    var(--c) 50%  100%, 
+    var(--c) 100% 50%, 
+    var(--c) 0    50%;
+  background-size: 10px 10px;
+  animation: l18 1s infinite;
+  position: relative;
+}
+.loader::before {    
+  content:"";
+  position: absolute;
+  inset:0;
+  margin: 3px;
+  background: repeating-conic-gradient(#0000 0 35deg,#03DAC5 0 90deg);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 3px),#000 0);
+  border-radius: 50%;
+}
+@keyframes l18 { 
+  100%{transform: rotate(.5turn)}
+}
+
+
+
+/* button  {
+  cursor: pointer; 
+} */
+.card-shadow {
+  @apply shadow-[5px_5px_5px] shadow-app-gray/20 dark:shadow-none
 }
