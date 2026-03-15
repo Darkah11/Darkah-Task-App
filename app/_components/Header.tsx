@@ -36,7 +36,7 @@ export default function Header({ user, board }: MyComponentProps) {
     }
   };
   return (
-    <div className=" w-full flex justify-between items-center px-3 py-5 border-b border-app-gray/30">
+    <div className=" w-full flex justify-between items-center pl-12 md:pl-3 px-3 py-5 border-b border-app-gray/30">
       <div>
         <h2 className=" text-xl font-bold">
           {user === null || !board?.title ? "Select Board" : board.title}

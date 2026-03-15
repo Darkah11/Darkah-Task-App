@@ -1,28 +1,18 @@
-// app/ui/dashboard/sidenav.tsx
+"use client";
 
-"use client"; // This is a Client Component, which uses hooks like usePathname
-
-import Image from "next/image";
-import { MdOutlineDashboard, MdDashboard, MdLogout } from "react-icons/md";
+import { MdLogout, MdMenu } from "react-icons/md";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import ThemeSwitch from "./ThemeSwitch";
 import { FaPlus } from "react-icons/fa6";
-// import { User } from "../_types/User";
-// import { cookies } from "next/headers";
-import { adminAuth } from "../_config/firebase-admin";
 import { User } from "../_types/User";
 import { signOut } from "firebase/auth";
 import { auth } from "../_config/firebase";
-import Modal from "./Modal";
 import { useState } from "react";
 import CreateBoard from "./CreateBoard";
 import { BoardWithId } from "../_types/Board";
 import Loader from "./Loader";
-
-// import menu from "../../public/icons/menu.svg";
-// import logo from "../../public/logo.png";
-
+import MobileMenu from "./MobileMenu";
 
 interface MyComponentProps {
   user: null | User;
@@ -33,6 +23,7 @@ export default function SideNav({ user, boards }: MyComponentProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const logout = async () => {
@@ -43,9 +34,9 @@ export default function SideNav({ user, boards }: MyComponentProps) {
       await fetch("/api/logout", {
         method: "POST",
       });
-      
-      router.push('/');
-      router.refresh()
+
+      router.push("/");
+      router.refresh();
       setLoading(false);
     } catch (error) {
       console.error("Logout error:", error);
@@ -143,6 +134,18 @@ export default function SideNav({ user, boards }: MyComponentProps) {
           </div>
         </div>
       </div>
+      <button
+        onClick={() => setMobileMenuOpen(true)}
+        className=" fixed top-[23px] left-3 md:hidden"
+      >
+        <MdMenu className=" w-7 h-7" />
+      </button>
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        user={user}
+        boards={boards}
+      />
     </>
   );
 }

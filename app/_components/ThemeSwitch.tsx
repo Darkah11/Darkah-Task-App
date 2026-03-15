@@ -22,7 +22,7 @@ const ThemeSwitch = () => {
         setTheme(newTheme);
         console.log("Switching theme to:", newTheme); // Add this line
       }}
-      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+      className=" ml-3  text-xs rounded-full px-2 py-1 bg-gray-300 dark:bg-gray-700"
     >
       {theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode"}
     </button>
